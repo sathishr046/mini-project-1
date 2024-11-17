@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- External JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Search Section -->
+        <div class="search-box">
+            <input type="text" id="city-input" placeholder="Enter city name...">
+            <button class="btn search-btn" onclick="getWeather()">
+                <i class="fas fa-search"></i>
+                Search
+            </button>
+            <button class="btn location-btn" onclick="getCurrentLocation()">
+                <i class="fas fa-location-dot"></i>
+                Current Location
+            </button>
+            <button class="btn theme-btn" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="btn unit-btn" onclick="toggleUnit()">
+                <i class="fas fa-temperature-high"></i>
+                °C/°F
+            </button>
+        </div>
+
+        <!-- Loading and Error Messages -->
+        <div id="loading-overlay" class="loading-overlay" style="display: none;">
+            <div class="loading-spinner"></div>
+        </div>
+        <div id="error-message" class="weather-alert" style="display: none;"></div>
+
+        <!-- Weather Grid -->
+        <div class="weather-grid">
+            <!-- Main Weather Card -->
+            <div class="weather-card">
+                <div class="weather-info">
+                    <button class="btn favorite-btn" onclick="toggleFavorite()">
+                        <i class="fas fa-heart" id="favorite-icon"></i>
+                    </button>
+                    <h2 id="city">Weather Dashboard</h2>
+                    <p id="date"></p>
+                    <div class="temperature" id="temperature">--°C</div>
+                    <p id="description">--</p>
+                    <img id="weather-icon" src="" alt="Weather Icon">
+                </div>
+
+                <div class="weather-details">
+                    <div class="detail-item">
+                        <i class="fas fa-temperature-high"></i>
+                        <div>
+                            <p>Feels Like</p>
+                            <p id="feels-like">--°C</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-wind"></i>
+                        <div>
+                            <p>Wind Speed</p>
+                            <p id="wind-speed">-- km/h</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-tint"></i>
+                        <div>
+                            <p>Humidity</p>
+                            <p id="humidity">--%</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-compress-alt"></i>
+                        <div>
+                            <p>Pressure</p>
+                            <p id="pressure">-- hPa</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weather Map Card -->
+            <div class="weather-card">
+                <h3>Weather Map</h3>
+                <div id="weather-map"></div>
+            </div>
+
+            <!-- Forecast Card -->
+            <div class="weather-card">
+                <h3>5-Day Forecast</h3>
+                <div class="forecast" id="forecast"></div>
+            </div>
+
+            <!-- Charts Card -->
+            <div class="weather-card">
+                <h3>Temperature Trend</h3>
+                <div class="chart-container">
+                    <canvas id="temp-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
